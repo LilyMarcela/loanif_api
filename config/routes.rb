@@ -11,9 +11,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :profiles: only: [:show, :create, :update]
       resources :borrowers, only: [:index]
       resources :lenders, only: [:index]
-      post 'assing_role', to 'roles#assing_role'
+      post 'assing_role', to: 'roles#assign_role'
     end
   end
 end

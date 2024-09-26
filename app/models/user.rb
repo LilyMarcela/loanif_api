@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_and_belongs_to_many :roles
+  has_many :profiles, dependent: :destroy
 
 
   def has_role(role_name)

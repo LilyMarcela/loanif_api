@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_26_013440) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_26_015805) do
+  create_table "borrower_profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lender_profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "profilable_type", null: false
+    t.integer "profilable_id", null: false
+    t.string "loan_purpose"
+    t.text "financial_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profilable_type", "profilable_id"], name: "index_profiles_on_profilable"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -49,4 +71,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_013440) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "profiles", "users"
 end
