@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :borrowers, only: [:index]
       resources :lenders, only: [:index]
+      post 'assing_role', to 'roles#assing_role'
     end
   end
 end
