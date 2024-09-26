@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
   has_many :profiles, dependent: :destroy
+  has_many :loan_requests, dependent: :destroy
 
 
   def has_role(role_name)

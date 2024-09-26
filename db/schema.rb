@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_26_015805) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_26_020853) do
   create_table "borrower_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -19,6 +19,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_015805) do
   create_table "lender_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "loan_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "amount"
+    t.integer "repayment_period"
+    t.string "status"
+    t.string "loan_purpose"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_loan_requests_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -71,5 +82,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_015805) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "loan_requests", "users"
   add_foreign_key "profiles", "users"
 end
